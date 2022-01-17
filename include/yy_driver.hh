@@ -14,7 +14,7 @@ namespace tiger {
     class YYDriver : public Driver {
     public:
         YYDriver(FILE *input, std::string filename) :
-                source_file_name(std::move(filename)), source_file(input) {
+                source_file_name(std::move(filename)), source_file(input) ,parser{*this}{
             location.initialize(&source_file_name);
         }
 
@@ -38,7 +38,7 @@ namespace tiger {
         std::string source_file_name;
         FILE *source_file;
 // Whether to generate parser debug traces.
-        yy::parser parser{};
+        yy::parser parser;
         yy::location location{};
 
         int pre_parse();

@@ -22,7 +22,7 @@
   void initialize_lexer(tiger::Driver &drv){
     yyin = drv.getSourceFile();
     yy_flex_debug = false;
-    driver = &drv;
+  //  driver = &drv;
   }
 
 %}
@@ -39,7 +39,7 @@ blank [ \t\r]
 %%
 %{
   // A handy shortcut to the location held by the driver.
-  yy::location& loc = driver->getLocation();
+  yy::location& loc = drv.getLocation();
   // Code run each time yylex is called.
   loc.step ();
 %}

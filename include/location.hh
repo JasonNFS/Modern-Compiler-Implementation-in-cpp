@@ -31,12 +31,12 @@
 // version 2.2 of Bison.
 
 /**
- ** \file /Users/yz/Documents/gits/compiler/bison/calc++/src/parser/location.hh
+ ** \file /Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/location.hh
  ** Define the yy::location class.
  */
 
-#ifndef YY_YY_USERS_YZ_DOCUMENTS_GITS_COMPILER_BISON_CALC_SRC_PARSER_LOCATION_HH_INCLUDED
-# define YY_YY_USERS_YZ_DOCUMENTS_GITS_COMPILER_BISON_CALC_SRC_PARSER_LOCATION_HH_INCLUDED
+#ifndef YY_YY_USERS_KYG_DOCUMENTS_GITS_MODERN_COMPILER_IMPLEMENTATION_IN_CPP_SRC_PARSER_LOCATION_HH_INCLUDED
+# define YY_YY_USERS_KYG_DOCUMENTS_GITS_MODERN_COMPILER_IMPLEMENTATION_IN_CPP_SRC_PARSER_LOCATION_HH_INCLUDED
 
 # include <iostream>
 # include <string>
@@ -54,7 +54,7 @@
 # endif
 
 namespace yy {
-#line 58 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/location.hh"
+#line 58 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/location.hh"
 
   /// A point in a source file.
   class position
@@ -299,6 +299,6 @@ namespace yy {
   }
 
 } // yy
-#line 303 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/location.hh"
+#line 303 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/location.hh"
 
-#endif // !YY_YY_USERS_YZ_DOCUMENTS_GITS_COMPILER_BISON_CALC_SRC_PARSER_LOCATION_HH_INCLUDED
+#endif // !YY_YY_USERS_KYG_DOCUMENTS_GITS_MODERN_COMPILER_IMPLEMENTATION_IN_CPP_SRC_PARSER_LOCATION_HH_INCLUDED
