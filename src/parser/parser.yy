@@ -1,22 +1,3 @@
-/* Parser for calc++.   -*- C++ -*-
-
-   Copyright (C) 2005-2015, 2018-2021 Free Software Foundation, Inc.
-
-   This file is part of Bison, the GNU Compiler Compiler.
-
-   This program is free software: you can redistribute it and/or modify
-   it under the terms of the GNU General Public License as published by
-   the Free Software Foundation, either version 3 of the License, or
-   (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
-
 %skeleton "lalr1.cc" // -*- C++ -*-
 %require "3.8"
 %header
@@ -31,12 +12,20 @@
 #pragma clang diagnostic ignored "-Wdeprecated-register"
   #include <string>
   #include <iostream>
+  namespace tiger {
+    class Driver;
+  }
 }
 
 %code {
-  #define YY_DECL yy::parser::symbol_type yylex()
-  YY_DECL;
+#include "driver.hh"
 }
+%param { tiger::Driver& drv }
+
+// %code {
+//   #define YY_DECL yy::parser::symbol_type yylex()
+//   YY_DECL;
+// }
 
 %locations
 

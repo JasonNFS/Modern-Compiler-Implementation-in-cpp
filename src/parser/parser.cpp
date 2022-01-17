@@ -42,12 +42,11 @@
 
 
 // Unqualified %code blocks.
-#line 36 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 20 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
 
-  #define YY_DECL yy::parser::symbol_type yylex()
-  YY_DECL;
+#include "driver.hh"
 
-#line 51 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 50 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
 
 #ifndef YY_
@@ -139,17 +138,18 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 143 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 142 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
   /// Build a parser object.
-  parser::parser ()
+  parser::parser (tiger::Driver& drv_yyarg)
 #if YYDEBUG
     : yydebug_ (false),
       yycdebug_ (&std::cerr),
 #else
     :
 #endif
-      yy_lac_established_ (false)
+      yy_lac_established_ (false),
+      drv (drv_yyarg)
   {}
 
   parser::~parser ()
@@ -324,21 +324,21 @@ namespace yy {
         switch (yykind)
     {
       case symbol_kind::S_IDENTIFIER: // "identifier"
-#line 119 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 108 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 330 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 330 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       case symbol_kind::S_NUMBER: // "number"
-#line 119 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 108 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < int > (); }
-#line 336 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 336 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       case symbol_kind::S_STRINGV: // "stringv"
-#line 119 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 108 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 342 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 342 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       default:
@@ -498,7 +498,7 @@ namespace yy {
         try
 #endif // YY_EXCEPTIONS
           {
-            symbol_type yylookahead (yylex ());
+            symbol_type yylookahead (yylex (drv));
             yyla.move (yylookahead);
           }
 #if YY_EXCEPTIONS
@@ -608,447 +608,447 @@ namespace yy {
           switch (yyn)
             {
   case 2: // exp: "number"
-#line 126 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 115 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {std::cout<<"NUMBER expr found\n";}
-#line 614 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 614 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 3: // exp: binary_op
-#line 127 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 116 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
               {std::cout<<"binary_op expr found\n";}
-#line 620 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 620 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 4: // exp: if_exp
-#line 128 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 117 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
            {std::cout<<"if_expr found\n";}
-#line 626 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 626 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 5: // exp: for_exp
-#line 129 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 118 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {std::cout<<"for_exp found\n";}
-#line 632 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 632 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 6: // exp: let_exp
-#line 130 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 119 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 638 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 638 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 7: // exp: while_exp
-#line 131 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 120 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 644 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 644 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 8: // exp: fcall
-#line 132 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 121 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 650 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 650 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 9: // exp: "nil"
-#line 133 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 122 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
         {}
-#line 656 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 656 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 10: // exp: "stringv"
-#line 134 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 123 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 662 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 662 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 11: // exp: record_value
-#line 135 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 124 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  {}
-#line 668 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 668 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 12: // exp: break
-#line 136 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 125 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 674 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 674 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 13: // exp: array_value
-#line 137 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 126 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 680 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 680 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 14: // exp: lvalue
-#line 138 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 127 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
            {}
-#line 686 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 686 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 15: // exp: "(" expl ")"
-#line 139 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 128 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 692 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 692 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 16: // exp: "(" ")"
-#line 140 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 129 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 698 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 698 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 17: // expl: exp
-#line 144 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 133 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
       {}
-#line 704 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 704 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 18: // expl: expl ";" exp
-#line 145 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 134 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 710 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 710 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 19: // decs: %empty
-#line 149 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 138 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
         {}
-#line 716 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 716 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 20: // decs: decs dec
-#line 150 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 139 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 722 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 722 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 21: // dec: vardec
-#line 153 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 142 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
          {}
-#line 728 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 728 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 22: // dec: tydec
-#line 154 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 143 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
          {}
-#line 734 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 734 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 23: // dec: fundec
-#line 155 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 144 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 740 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 740 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 24: // tydec: "type" type_id "=" ty
-#line 159 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 148 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                         {}
-#line 746 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 746 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 25: // ty: type_id
-#line 162 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 151 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 752 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 752 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 26: // ty: "{" "}"
-#line 163 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 152 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 758 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 758 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 27: // ty: "{" tyfields "}"
-#line 164 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 153 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                     {}
-#line 764 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 764 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 28: // ty: "array" "of" type_id
-#line 165 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 154 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                         {}
-#line 770 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 770 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 29: // tyfield: "identifier" ":" type_id
-#line 168 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 157 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                          {}
-#line 776 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 776 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 30: // tyfields: tyfield
-#line 171 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 160 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 782 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 782 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 31: // tyfields: tyfields "," tyfield
-#line 172 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 161 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                        {}
-#line 788 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 788 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 32: // type_id: "identifier"
-#line 175 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 164 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 794 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 794 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 33: // type_id: "int"
-#line 176 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 165 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
          {}
-#line 800 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 800 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 34: // type_id: "string"
-#line 177 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 166 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 806 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 806 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 35: // vardec: "var" "identifier" ":=" exp
-#line 181 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 170 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                           {
     std::cout<<"Got vardec:\n";
   }
-#line 814 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 814 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 36: // vardec: "var" "identifier" ":" type_id ":=" exp
-#line 184 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 173 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                        {}
-#line 820 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 820 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 37: // fundec: "function" "identifier" "(" tyfields ")" "=" exp
-#line 188 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 177 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                                {}
-#line 826 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 826 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 38: // fundec: "function" "identifier" "(" ")" "=" exp
-#line 189 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 178 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                        {}
-#line 832 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 832 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 39: // fundec: "function" "identifier" "(" tyfields ")" ":" type_id "=" exp
-#line 190 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 179 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                                             {}
-#line 838 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 838 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 40: // fundec: "function" "identifier" "(" ")" ":" type_id "=" exp
-#line 191 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 180 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                                    {}
-#line 844 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 844 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 41: // lvalue: "identifier"
-#line 195 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 184 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 850 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 850 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 42: // lvalue: lvalue1
-#line 196 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 185 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
            {}
-#line 856 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 856 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 43: // lvalue1: id_brack
-#line 200 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 189 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 862 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 862 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 44: // lvalue1: "identifier" "." "identifier"
-#line 201 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 190 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                {}
-#line 868 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 868 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 45: // lvalue1: lvalue1 "." "identifier"
-#line 202 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 191 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                             {}
-#line 874 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 874 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 46: // lvalue1: lvalue1 "[" exp "]"
-#line 203 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 192 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                         {}
-#line 880 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 880 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 47: // id_brack: type_id "[" exp "]"
-#line 206 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 195 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                             {}
-#line 886 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 886 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 48: // array_value: id_brack "of" exp
-#line 210 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 199 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                     {}
-#line 892 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 892 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 49: // fcall: "identifier" "(" ")"
-#line 215 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 204 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                       {}
-#line 898 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 898 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 50: // fcall: "identifier" "(" args ")"
-#line 216 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 205 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                             {}
-#line 904 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 904 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 51: // args: exp
-#line 219 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 208 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
       {}
-#line 910 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 910 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 52: // args: exp "," args
-#line 220 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 209 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  {}
-#line 916 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 916 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 53: // binary_op: exp "|" exp
-#line 226 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 215 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 922 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 922 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 54: // binary_op: exp "&" exp
-#line 227 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 216 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 928 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 928 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 55: // binary_op: exp "=" exp
-#line 228 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 217 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 934 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 934 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 56: // binary_op: exp ":=" exp
-#line 229 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 218 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 940 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 940 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 57: // binary_op: exp "<>" exp
-#line 230 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 219 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 946 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 946 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 58: // binary_op: exp "<" exp
-#line 231 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 220 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 952 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 952 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 59: // binary_op: exp "<=" exp
-#line 232 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 221 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 958 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 958 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 60: // binary_op: exp ">" exp
-#line 233 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 222 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 964 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 964 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 61: // binary_op: exp ">=" exp
-#line 234 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 223 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 970 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 970 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 62: // binary_op: exp "+" exp
-#line 235 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 224 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 976 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 976 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 63: // binary_op: exp "-" exp
-#line 236 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 225 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 982 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 982 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 64: // binary_op: exp "*" exp
-#line 237 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 226 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 988 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 988 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 65: // binary_op: exp "/" exp
-#line 238 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 227 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 994 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 994 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 66: // binary_op: "-" exp
-#line 239 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 228 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                      {std::cout<<"neg found\n";}
-#line 1000 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1000 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 70: // field_assigns: field_assigns "," field_assign
-#line 248 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 237 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                    {}
-#line 1006 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1006 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 71: // field_assign: "identifier" "=" exp
-#line 251 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 240 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                      {}
-#line 1012 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1012 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 72: // if_exp: "if" exp "then" exp
-#line 255 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 244 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                   {std::cout<<"if_then found!"<<std::endl;}
-#line 1018 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1018 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 73: // if_exp: "if" exp "then" exp "else" exp
-#line 256 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 245 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                             {std::cout<<"if_then_else found!\n";}
-#line 1024 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1024 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 74: // while_exp: "while" exp "do" exp
-#line 260 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 249 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                    {}
-#line 1030 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1030 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 75: // for_exp: "for" "identifier" ":=" exp "to" exp "do" exp
-#line 264 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 253 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                         {}
-#line 1036 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1036 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 76: // break: "break"
-#line 268 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 257 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
         {}
-#line 1042 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1042 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 77: // let_exp: "let" decs "in" expl "end"
-#line 272 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 261 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                        {}
-#line 1048 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1048 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
 
-#line 1052 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1052 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
             default:
               break;
@@ -1726,14 +1726,14 @@ namespace yy {
   const short
   parser::yyrline_[] =
   {
-       0,   126,   126,   127,   128,   129,   130,   131,   132,   133,
-     134,   135,   136,   137,   138,   139,   140,   144,   145,   149,
-     150,   153,   154,   155,   159,   162,   163,   164,   165,   168,
-     171,   172,   175,   176,   177,   181,   184,   188,   189,   190,
-     191,   195,   196,   200,   201,   202,   203,   206,   210,   215,
-     216,   219,   220,   226,   227,   228,   229,   230,   231,   232,
-     233,   234,   235,   236,   237,   238,   239,   243,   244,   247,
-     248,   251,   255,   256,   260,   264,   268,   272
+       0,   115,   115,   116,   117,   118,   119,   120,   121,   122,
+     123,   124,   125,   126,   127,   128,   129,   133,   134,   138,
+     139,   142,   143,   144,   148,   151,   152,   153,   154,   157,
+     160,   161,   164,   165,   166,   170,   173,   177,   178,   179,
+     180,   184,   185,   189,   190,   191,   192,   195,   199,   204,
+     205,   208,   209,   215,   216,   217,   218,   219,   220,   221,
+     222,   223,   224,   225,   226,   227,   228,   232,   233,   236,
+     237,   240,   244,   245,   249,   253,   257,   261
   };
 
   void
@@ -1765,9 +1765,9 @@ namespace yy {
 
 
 } // yy
-#line 1769 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.cpp"
+#line 1769 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
-#line 278 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 267 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
 
 
 void

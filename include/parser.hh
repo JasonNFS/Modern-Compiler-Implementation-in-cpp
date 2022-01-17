@@ -32,7 +32,7 @@
 
 
 /**
- ** \file /Users/yz/Documents/gits/compiler/bison/calc++/include/parser.hh
+ ** \file /Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh
  ** Define the yy::parser class.
  */
 
@@ -42,16 +42,19 @@
 // especially those whose name start with YY_ or yy_.  They are
 // private implementation details that can be changed or removed.
 
-#ifndef YY_YY_USERS_YZ_DOCUMENTS_GITS_COMPILER_BISON_CALC_INCLUDE_PARSER_HH_INCLUDED
-# define YY_YY_USERS_YZ_DOCUMENTS_GITS_COMPILER_BISON_CALC_INCLUDE_PARSER_HH_INCLUDED
+#ifndef YY_YY_USERS_KYG_DOCUMENTS_GITS_MODERN_COMPILER_IMPLEMENTATION_IN_CPP_INCLUDE_PARSER_HH_INCLUDED
+# define YY_YY_USERS_KYG_DOCUMENTS_GITS_MODERN_COMPILER_IMPLEMENTATION_IN_CPP_INCLUDE_PARSER_HH_INCLUDED
 // "%code requires" blocks.
-#line 30 "/Users/yz/Documents/gits/compiler/bison/calc++/src/parser/parser.yy"
+#line 11 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
 
 #pragma clang diagnostic ignored "-Wdeprecated-register"
   #include <string>
   #include <iostream>
+  namespace tiger {
+    class Driver;
+  }
 
-#line 55 "/Users/yz/Documents/gits/compiler/bison/calc++/include/parser.hh"
+#line 58 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -191,7 +194,7 @@
 #endif
 
 namespace yy {
-#line 195 "/Users/yz/Documents/gits/compiler/bison/calc++/include/parser.hh"
+#line 198 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
 
 
 
@@ -867,7 +870,7 @@ switch (yykind)
     };
 
     /// Build a parser object.
-    parser ();
+    parser (tiger::Driver& drv_yyarg);
     virtual ~parser ();
 
 #if 201103L <= YY_CPLUSPLUS
@@ -1997,6 +2000,8 @@ switch (yykind)
     };
 
 
+    // User arguments.
+    tiger::Driver& drv;
 
   };
 
@@ -2131,9 +2136,9 @@ switch (yykind)
 
 
 } // yy
-#line 2135 "/Users/yz/Documents/gits/compiler/bison/calc++/include/parser.hh"
+#line 2140 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
 
 
 
 
-#endif // !YY_YY_USERS_YZ_DOCUMENTS_GITS_COMPILER_BISON_CALC_INCLUDE_PARSER_HH_INCLUDED
+#endif // !YY_YY_USERS_KYG_DOCUMENTS_GITS_MODERN_COMPILER_IMPLEMENTATION_IN_CPP_INCLUDE_PARSER_HH_INCLUDED

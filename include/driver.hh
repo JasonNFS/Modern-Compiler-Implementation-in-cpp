@@ -18,4 +18,9 @@ namespace tiger {
         virtual ~Driver() = default;
     };
 }
+
+# define YY_DECL \
+  yy::parser::symbol_type yylex (tiger::Driver& drv)
+YY_DECL;
+
 #endif//PARSER_DRIVER_H
