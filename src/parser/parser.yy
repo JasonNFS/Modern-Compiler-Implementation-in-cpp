@@ -134,7 +134,7 @@ exp:
    |let_exp {} 
    |while_exp{}
    |fcall {}
-   |NIL {}
+   |NIL {$$ = drv.getAstBuilder().buildNilExp(yyla.location);}
    |STRINGV {}
    |record_value {}
    |break {};

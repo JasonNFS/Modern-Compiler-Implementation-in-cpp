@@ -29,9 +29,15 @@ private:
 
 public:
   NumberExp(yy::location l, NumberType val) : Exp{ l }, value{ val } {}
-  NumberType getVal(){
+  NumberType getVal()
+  {
     return value;
   }
+};
+class NilExp : public Exp
+{
+public:
+  NilExp(yy::location l) : Exp(l) {}
 };
 }// namespace tiger
 #endif// TIGER_COMPILER_AST_HH

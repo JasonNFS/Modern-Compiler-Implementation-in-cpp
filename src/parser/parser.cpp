@@ -704,7 +704,7 @@ namespace yy {
 
   case 10: // exp: "nil"
 #line 137 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-        {}
+        {yylhs.value.as < tiger::Exp* > () = drv.getAstBuilder().buildNilExp(yyla.location);}
 #line 709 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 

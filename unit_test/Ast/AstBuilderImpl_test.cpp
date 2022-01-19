@@ -18,3 +18,15 @@ TEST(AstBuilder, NumberExpTest)
   EXPECT_TRUE(numberExpr != nullptr);
   EXPECT_TRUE(numberExpr->getVal() == 3);
 }
+TEST(AstBuilder, NilExpr)
+{
+  std::string number_code = "nil";
+  auto f = tigertest::string2file(number_code);
+  tiger::YYDriver driver{ f, "unknown_tmpfile" };
+  int success = driver.run();
+  fclose(f);
+  EXPECT_EQ(bool(success), bool(0));
+  auto ast = driver.getAstBuilder().getRoot();
+  auto numberExpr = dynamic_cast<tiger::NilExp *>(ast);
+  EXPECT_TRUE(numberExpr != nullptr);
+}

@@ -5,20 +5,21 @@
 #include "location.hh"
 #include <memory>
 
-namespace tiger{
-class AstBuilderImpl : public AstBuilder{
+namespace tiger {
+class AstBuilderImpl : public AstBuilder
+{
 public:
-  Exp* getRoot() override{
+  Exp *getRoot() override
+  {
     return root.get();
   }
-  void setRoot(Exp* r) override{
+  void setRoot(Exp *r) override
+  {
     root.reset(r);
   }
-  NumberExp* buildNumberExp(yy::location l,NumberExp::NumberType value) override {
-    return new NumberExp(l,value);
-  }
+
 private:
   std::unique_ptr<Exp> root;
 };
-}
+}// namespace tiger
 #endif
