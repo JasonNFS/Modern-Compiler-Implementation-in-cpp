@@ -50,11 +50,12 @@
 #pragma clang diagnostic ignored "-Wdeprecated-register"
   #include <string>
   #include <iostream>
+  #include "Ast.hh"
   namespace tiger {
     class Driver;
   }
 
-#line 58 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
+#line 59 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
 
 # include <cassert>
 # include <cstdlib> // std::abort
@@ -194,7 +195,7 @@
 #endif
 
 namespace yy {
-#line 198 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
+#line 199 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
 
 
 
@@ -419,6 +420,10 @@ namespace yy {
       // "identifier"
       // "stringv"
       char dummy2[sizeof (std::string)];
+
+      // unit
+      // exp
+      char dummy3[sizeof (tiger::Exp*)];
     };
 
     /// The size of the largest semantic type.
@@ -585,32 +590,33 @@ namespace yy {
         S_STRINGV = 47,                          // "stringv"
         S_NEG = 48,                              // NEG
         S_YYACCEPT = 49,                         // $accept
-        S_exp = 50,                              // exp
-        S_expl = 51,                             // expl
-        S_decs = 52,                             // decs
-        S_dec = 53,                              // dec
-        S_tydec = 54,                            // tydec
-        S_ty = 55,                               // ty
-        S_tyfield = 56,                          // tyfield
-        S_tyfields = 57,                         // tyfields
-        S_type_id = 58,                          // type_id
-        S_vardec = 59,                           // vardec
-        S_fundec = 60,                           // fundec
-        S_lvalue = 61,                           // lvalue
-        S_lvalue1 = 62,                          // lvalue1
-        S_id_brack = 63,                         // id_brack
-        S_array_value = 64,                      // array_value
-        S_fcall = 65,                            // fcall
-        S_args = 66,                             // args
-        S_binary_op = 67,                        // binary_op
-        S_record_value = 68,                     // record_value
-        S_field_assigns = 69,                    // field_assigns
-        S_field_assign = 70,                     // field_assign
-        S_if_exp = 71,                           // if_exp
-        S_while_exp = 72,                        // while_exp
-        S_for_exp = 73,                          // for_exp
-        S_break = 74,                            // break
-        S_let_exp = 75                           // let_exp
+        S_unit = 50,                             // unit
+        S_exp = 51,                              // exp
+        S_expl = 52,                             // expl
+        S_decs = 53,                             // decs
+        S_dec = 54,                              // dec
+        S_tydec = 55,                            // tydec
+        S_ty = 56,                               // ty
+        S_tyfield = 57,                          // tyfield
+        S_tyfields = 58,                         // tyfields
+        S_type_id = 59,                          // type_id
+        S_vardec = 60,                           // vardec
+        S_fundec = 61,                           // fundec
+        S_lvalue = 62,                           // lvalue
+        S_lvalue1 = 63,                          // lvalue1
+        S_id_brack = 64,                         // id_brack
+        S_array_value = 65,                      // array_value
+        S_fcall = 66,                            // fcall
+        S_args = 67,                             // args
+        S_binary_op = 68,                        // binary_op
+        S_record_value = 69,                     // record_value
+        S_field_assigns = 70,                    // field_assigns
+        S_field_assign = 71,                     // field_assign
+        S_if_exp = 72,                           // if_exp
+        S_while_exp = 73,                        // while_exp
+        S_for_exp = 74,                          // for_exp
+        S_break = 75,                            // break
+        S_let_exp = 76                           // let_exp
       };
     };
 
@@ -654,6 +660,11 @@ namespace yy {
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRINGV: // "stringv"
         value.move< std::string > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_unit: // unit
+      case symbol_kind::S_exp: // exp
+        value.move< tiger::Exp* > (std::move (that.value));
         break;
 
       default:
@@ -707,6 +718,20 @@ namespace yy {
       {}
 #endif
 
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, tiger::Exp*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const tiger::Exp*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
       /// Destroy the symbol.
       ~basic_symbol ()
       {
@@ -738,6 +763,11 @@ switch (yykind)
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRINGV: // "stringv"
         value.template destroy< std::string > ();
+        break;
+
+      case symbol_kind::S_unit: // unit
+      case symbol_kind::S_exp: // exp
+        value.template destroy< tiger::Exp* > ();
         break;
 
       default:
@@ -1994,9 +2024,9 @@ switch (yykind)
     /// Constants.
     enum
     {
-      yylast_ = 440,     ///< Last index in yytable_.
-      yynnts_ = 27,  ///< Number of nonterminal symbols.
-      yyfinal_ = 38 ///< Termination state number.
+      yylast_ = 409,     ///< Last index in yytable_.
+      yynnts_ = 28,  ///< Number of nonterminal symbols.
+      yyfinal_ = 39 ///< Termination state number.
     };
 
 
@@ -2028,6 +2058,11 @@ switch (yykind)
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRINGV: // "stringv"
         value.copy< std::string > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_unit: // unit
+      case symbol_kind::S_exp: // exp
+        value.copy< tiger::Exp* > (YY_MOVE (that.value));
         break;
 
       default:
@@ -2068,6 +2103,11 @@ switch (yykind)
       case symbol_kind::S_IDENTIFIER: // "identifier"
       case symbol_kind::S_STRINGV: // "stringv"
         value.move< std::string > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_unit: // unit
+      case symbol_kind::S_exp: // exp
+        value.move< tiger::Exp* > (YY_MOVE (s.value));
         break;
 
       default:
@@ -2136,7 +2176,7 @@ switch (yykind)
 
 
 } // yy
-#line 2140 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
+#line 2180 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
 
 
 

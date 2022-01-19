@@ -12,13 +12,14 @@
 #pragma clang diagnostic ignored "-Wdeprecated-register"
   #include <string>
   #include <iostream>
+  #include "Ast.hh"
   namespace tiger {
     class Driver;
   }
 }
 
 %code {
-#include "driver.hh"
+#include "Driver.hh"
 }
 %param { tiger::Driver& drv }
 
@@ -87,6 +88,8 @@
 %token <std::string> IDENTIFIER "identifier"
 %token <int> NUMBER "number"
 %token <std::string> STRINGV "stringv"
+%nterm <tiger::Exp*> exp
+%nterm <tiger::Exp*> unit
 
 
 //declare precedence
@@ -108,18 +111,30 @@
 %printer { yyo << $$; } <*>;
 
 %%
+%start unit;
 
-%start exp;
-
+unit:   exp {
+        std::cout << "found unit:";
+        if($1)
+            drv.getAstBuilder().setRoot($1);
+        
+    }
+    ;
 exp:
-   NUMBER {std::cout<<"NUMBER expr found\n";}
+   NUMBER
+   {
+    std::cout<<"NUMBER expr found "<<yyla.location<<"\n";
+    $$ = drv.getAstBuilder().buildNumberExp(yyla.location,$1);
+    //$$ = new tiger::NumberExp{yyla.location,
+    //    static_cast<typename tiger::NumberExp::NumberType>($1)};
+   }
    |binary_op {std::cout<<"binary_op expr found\n";}
    |if_exp {std::cout<<"if_expr found\n";}
    |for_exp {std::cout<<"for_exp found\n";}
    |let_exp {} 
    |while_exp{}
    |fcall {}
-   |NIL {}
+   |NIL {$$ = drv.getAstBuilder().buildNilExp(yyla.location);}
    |STRINGV {}
    |record_value {}
    |break {};
