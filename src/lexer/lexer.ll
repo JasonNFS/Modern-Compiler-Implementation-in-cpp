@@ -6,7 +6,7 @@
 # include <cstdlib>
 # include <cstring> // strerror
 # include <string>
-# include "driver.hh"
+# include "Driver.hh"
 # include "parser.hh"
 # include "lexer.hh"
 %}

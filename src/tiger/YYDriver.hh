@@ -7,9 +7,10 @@
 
 #include <string>
 #include <vector>
-#include "driver.hh"
+#include "Driver.hh"
 #include "parser.hh"
-
+#include "AstBuilder.hh"
+#include "Ast/AstBuilderImpl.hh"
 namespace tiger {
     class YYDriver : public Driver {
     public:
@@ -32,7 +33,9 @@ namespace tiger {
         yy::location& getLocation() override{
             return location;
         }
-
+        AstBuilder& getAstBuilder() override{
+            return astBuilder;
+        }
 
     private:
         std::string source_file_name;
@@ -40,6 +43,7 @@ namespace tiger {
 // Whether to generate parser debug traces.
         yy::parser parser;
         yy::location location{};
+        AstBuilderImpl astBuilder{};
 
         int pre_parse();
 

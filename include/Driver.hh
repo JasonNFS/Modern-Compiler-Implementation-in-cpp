@@ -1,5 +1,6 @@
 #ifndef PARSER_DRIVER_H
 #define PARSER_DRIVER_H
+#include "AstBuilder.hh"
 #include "parser.hh"
 #include <cstdio>
 
@@ -13,7 +14,9 @@ namespace tiger {
 
         virtual yy::location& getLocation() = 0;
 
-        virtual FILE *getSourceFile() = 0;
+        virtual FILE *getSourceFile()  = 0;
+
+        virtual AstBuilder& getAstBuilder()  = 0;
 
         virtual ~Driver() = default;
     };
