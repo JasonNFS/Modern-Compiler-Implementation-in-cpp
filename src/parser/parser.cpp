@@ -45,8 +45,9 @@
 #line 21 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
 
 #include "Driver.hh"
+using namespace tiger;
 
-#line 50 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 51 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
 
 #ifndef YY_
@@ -138,7 +139,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 142 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 143 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
   /// Build a parser object.
   parser::parser (tiger::Driver& drv_yyarg)
@@ -216,9 +217,17 @@ namespace yy {
         value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.YY_MOVE_OR_COPY< tiger::BinaryOpExp* > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.YY_MOVE_OR_COPY< tiger::Exp* > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.YY_MOVE_OR_COPY< tiger::IfExp* > (YY_MOVE (that.value));
         break;
 
       default:
@@ -245,9 +254,17 @@ namespace yy {
         value.move< std::string > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.move< tiger::BinaryOpExp* > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.move< tiger::Exp* > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.move< tiger::IfExp* > (YY_MOVE (that.value));
         break;
 
       default:
@@ -274,9 +291,17 @@ namespace yy {
         value.copy< std::string > (that.value);
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.copy< tiger::BinaryOpExp* > (that.value);
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.copy< tiger::Exp* > (that.value);
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.copy< tiger::IfExp* > (that.value);
         break;
 
       default:
@@ -302,9 +327,17 @@ namespace yy {
         value.move< std::string > (that.value);
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.move< tiger::BinaryOpExp* > (that.value);
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.move< tiger::Exp* > (that.value);
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.move< tiger::IfExp* > (that.value);
         break;
 
       default:
@@ -344,33 +377,45 @@ namespace yy {
         switch (yykind)
     {
       case symbol_kind::S_IDENTIFIER: // "identifier"
-#line 111 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 113 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 350 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 383 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       case symbol_kind::S_NUMBER: // "number"
-#line 111 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 113 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < int > (); }
-#line 356 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 389 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       case symbol_kind::S_STRINGV: // "stringv"
-#line 111 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 113 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < std::string > (); }
-#line 362 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 395 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       case symbol_kind::S_unit: // unit
-#line 111 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 113 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < tiger::Exp* > (); }
-#line 368 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 401 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       case symbol_kind::S_exp: // exp
-#line 111 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 113 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  { yyo << yysym.value.template as < tiger::Exp* > (); }
-#line 374 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 407 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+        break;
+
+      case symbol_kind::S_binary_op: // binary_op
+#line 113 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+                 { yyo << yysym.value.template as < tiger::BinaryOpExp* > (); }
+#line 413 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+#line 113 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+                 { yyo << yysym.value.template as < tiger::IfExp* > (); }
+#line 419 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
         break;
 
       default:
@@ -619,9 +664,17 @@ namespace yy {
         yylhs.value.emplace< std::string > ();
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        yylhs.value.emplace< tiger::BinaryOpExp* > ();
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         yylhs.value.emplace< tiger::Exp* > ();
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        yylhs.value.emplace< tiger::IfExp* > ();
         break;
 
       default:
@@ -645,463 +698,456 @@ namespace yy {
           switch (yyn)
             {
   case 2: // unit: exp
-#line 116 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 118 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {
-        std::cout << "found unit:";
         if(yystack_[0].value.as < tiger::Exp* > ())
             drv.getAstBuilder().setRoot(yystack_[0].value.as < tiger::Exp* > ());
-        
     }
-#line 656 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 707 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 3: // exp: "number"
-#line 125 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-   {
-    std::cout<<"NUMBER expr found "<<yyla.location<<"\n";
-    yylhs.value.as < tiger::Exp* > () = drv.getAstBuilder().buildNumberExp(yyla.location,yystack_[0].value.as < int > ());
-    //$$ = new tiger::NumberExp{yyla.location,
-    //    static_cast<typename tiger::NumberExp::NumberType>($1)};
-   }
-#line 667 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 124 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+          {yylhs.value.as < tiger::Exp* > () = drv.getAstBuilder().BuildNumberExp(yyla.location,yystack_[0].value.as < int > ());}
+#line 713 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 4: // exp: binary_op
-#line 131 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-              {std::cout<<"binary_op expr found\n";}
-#line 673 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 125 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+              {yylhs.value.as < tiger::Exp* > () = yystack_[0].value.as < tiger::BinaryOpExp* > ();}
+#line 719 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 5: // exp: if_exp
-#line 132 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-           {std::cout<<"if_expr found\n";}
-#line 679 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 126 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+           {yylhs.value.as < tiger::Exp* > () = yystack_[0].value.as < tiger::IfExp* > ();}
+#line 725 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 6: // exp: for_exp
-#line 133 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 127 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {std::cout<<"for_exp found\n";}
-#line 685 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 731 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 7: // exp: let_exp
-#line 134 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 128 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 691 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 737 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 8: // exp: while_exp
-#line 135 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 129 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 697 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 743 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 9: // exp: fcall
-#line 136 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 130 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 703 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 749 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 10: // exp: "nil"
-#line 137 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-        {yylhs.value.as < tiger::Exp* > () = drv.getAstBuilder().buildNilExp(yyla.location);}
-#line 709 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 131 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+        {yylhs.value.as < tiger::Exp* > () = drv.getAstBuilder().BuildNilExp(yyla.location);}
+#line 755 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 11: // exp: "stringv"
-#line 138 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 132 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 715 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 761 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 12: // exp: record_value
-#line 139 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 133 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  {}
-#line 721 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 767 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 13: // exp: break
-#line 140 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 134 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 727 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 773 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 14: // exp: array_value
-#line 141 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 135 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 733 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 779 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 15: // exp: lvalue
-#line 142 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 136 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
            {}
-#line 739 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 785 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 16: // exp: "(" expl ")"
-#line 143 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 137 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 745 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 791 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 17: // exp: "(" ")"
-#line 144 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 138 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 751 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 797 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 18: // expl: exp
-#line 148 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 142 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
       {}
-#line 757 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 803 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 19: // expl: expl ";" exp
-#line 149 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 143 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 763 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 809 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 20: // decs: %empty
-#line 153 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 147 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
         {}
-#line 769 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 815 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 21: // decs: decs dec
-#line 154 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 148 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 775 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 821 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 22: // dec: vardec
-#line 157 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 151 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
          {}
-#line 781 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 827 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 23: // dec: tydec
-#line 158 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 152 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
          {}
-#line 787 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 833 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 24: // dec: fundec
-#line 159 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 153 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 793 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 839 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 25: // tydec: "type" type_id "=" ty
-#line 163 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 157 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                         {}
-#line 799 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 845 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 26: // ty: type_id
-#line 166 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 160 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 805 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 851 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 27: // ty: "{" "}"
-#line 167 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 161 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 811 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 857 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 28: // ty: "{" tyfields "}"
-#line 168 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 162 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                     {}
-#line 817 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 863 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 29: // ty: "array" "of" type_id
-#line 169 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 163 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                         {}
-#line 823 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 869 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 30: // tyfield: "identifier" ":" type_id
-#line 172 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 166 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                          {}
-#line 829 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 875 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 31: // tyfields: tyfield
-#line 175 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 169 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
           {}
-#line 835 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 881 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 32: // tyfields: tyfields "," tyfield
-#line 176 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 170 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                        {}
-#line 841 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 887 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 33: // type_id: "identifier"
-#line 179 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 173 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 847 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 893 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 34: // type_id: "int"
-#line 180 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 174 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
          {}
-#line 853 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 899 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 35: // type_id: "string"
-#line 181 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 175 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
             {}
-#line 859 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 905 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 36: // vardec: "var" "identifier" ":=" exp
-#line 185 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 179 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                           {
     std::cout<<"Got vardec:\n";
   }
-#line 867 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 913 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 37: // vardec: "var" "identifier" ":" type_id ":=" exp
-#line 188 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 182 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                        {}
-#line 873 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 919 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 38: // fundec: "function" "identifier" "(" tyfields ")" "=" exp
-#line 192 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 186 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                                {}
-#line 879 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 925 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 39: // fundec: "function" "identifier" "(" ")" "=" exp
-#line 193 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 187 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                        {}
-#line 885 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 931 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 40: // fundec: "function" "identifier" "(" tyfields ")" ":" type_id "=" exp
-#line 194 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 188 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                                             {}
-#line 891 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 937 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 41: // fundec: "function" "identifier" "(" ")" ":" type_id "=" exp
-#line 195 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 189 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                                    {}
-#line 897 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 943 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 42: // lvalue: "identifier"
-#line 199 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 193 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 903 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 949 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 43: // lvalue: lvalue1
-#line 200 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 194 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
            {}
-#line 909 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 955 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 44: // lvalue1: id_brack
-#line 204 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 198 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 915 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 961 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 45: // lvalue1: "identifier" "." "identifier"
-#line 205 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 199 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                {}
-#line 921 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 967 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 46: // lvalue1: lvalue1 "." "identifier"
-#line 206 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 200 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                             {}
-#line 927 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 973 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 47: // lvalue1: lvalue1 "[" exp "]"
-#line 207 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 201 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                         {}
-#line 933 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 979 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 48: // id_brack: type_id "[" exp "]"
-#line 210 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 204 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                             {}
-#line 939 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 985 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 49: // array_value: id_brack "of" exp
-#line 214 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 208 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                     {}
-#line 945 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 991 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 50: // fcall: "identifier" "(" ")"
-#line 219 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 213 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                       {}
-#line 951 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 997 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 51: // fcall: "identifier" "(" args ")"
-#line 220 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 214 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                             {}
-#line 957 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1003 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 52: // args: exp
-#line 223 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 217 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
       {}
-#line 963 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1009 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 53: // args: exp "," args
-#line 224 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 218 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                  {}
-#line 969 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1015 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 54: // binary_op: exp "|" exp
-#line 230 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 224 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
              {}
-#line 975 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1021 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 55: // binary_op: exp "&" exp
-#line 231 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 225 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 981 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1027 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 56: // binary_op: exp "=" exp
-#line 232 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 226 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 987 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1033 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 57: // binary_op: exp ":=" exp
-#line 233 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 227 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 993 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1039 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 58: // binary_op: exp "<>" exp
-#line 234 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 228 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 999 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1045 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 59: // binary_op: exp "<" exp
-#line 235 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 229 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 1005 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1051 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 60: // binary_op: exp "<=" exp
-#line 236 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 230 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 1011 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1057 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 61: // binary_op: exp ">" exp
-#line 237 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 231 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 1017 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1063 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 62: // binary_op: exp ">=" exp
-#line 238 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 232 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                 {}
-#line 1023 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1069 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 63: // binary_op: exp "+" exp
-#line 239 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-               {}
-#line 1029 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 233 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+               {yylhs.value.as < tiger::BinaryOpExp* > () = drv.getAstBuilder().BuildBinaryOpExp(yyla.location,yystack_[2].value.as < tiger::Exp* > (),yystack_[0].value.as < tiger::Exp* > (),BinaryOpExp::OpType::plus);}
+#line 1075 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 64: // binary_op: exp "-" exp
-#line 240 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 234 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 1035 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1081 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 65: // binary_op: exp "*" exp
-#line 241 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 235 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 1041 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1087 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 66: // binary_op: exp "/" exp
-#line 242 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 236 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                {}
-#line 1047 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1093 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 67: // binary_op: "-" exp
-#line 243 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 237 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                      {std::cout<<"neg found\n";}
-#line 1053 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1099 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 71: // field_assigns: field_assigns "," field_assign
-#line 252 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 246 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                    {}
-#line 1059 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1105 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 72: // field_assign: "identifier" "=" exp
-#line 255 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 249 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                      {}
-#line 1065 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1111 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 73: // if_exp: "if" exp "then" exp
-#line 259 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-                  {std::cout<<"if_then found!"<<std::endl;}
-#line 1071 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 253 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+                  {yylhs.value.as < tiger::IfExp* > () = drv.getAstBuilder().BuildIfExp(yyla.location,yystack_[2].value.as < tiger::Exp* > (),yystack_[0].value.as < tiger::Exp* > ());}
+#line 1117 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 74: // if_exp: "if" exp "then" exp "else" exp
-#line 260 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
-                            {std::cout<<"if_then_else found!\n";}
-#line 1077 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 254 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+                            {yylhs.value.as < tiger::IfExp* > () = drv.getAstBuilder().BuildIfExp(yyla.location,yystack_[4].value.as < tiger::Exp* > (),yystack_[2].value.as < tiger::Exp* > (),yystack_[0].value.as < tiger::Exp* > ());}
+#line 1123 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 75: // while_exp: "while" exp "do" exp
-#line 264 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 258 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                    {}
-#line 1083 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1129 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 76: // for_exp: "for" "identifier" ":=" exp "to" exp "do" exp
-#line 268 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 262 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                                         {}
-#line 1089 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1135 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 77: // break: "break"
-#line 272 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 266 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
         {}
-#line 1095 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1141 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
   case 78: // let_exp: "let" decs "in" expl "end"
-#line 276 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 270 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
                        {}
-#line 1101 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1147 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
     break;
 
 
-#line 1105 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1151 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
             default:
               break;
@@ -1771,14 +1817,14 @@ namespace yy {
   const short
   parser::yyrline_[] =
   {
-       0,   116,   116,   124,   131,   132,   133,   134,   135,   136,
-     137,   138,   139,   140,   141,   142,   143,   144,   148,   149,
-     153,   154,   157,   158,   159,   163,   166,   167,   168,   169,
-     172,   175,   176,   179,   180,   181,   185,   188,   192,   193,
-     194,   195,   199,   200,   204,   205,   206,   207,   210,   214,
-     219,   220,   223,   224,   230,   231,   232,   233,   234,   235,
-     236,   237,   238,   239,   240,   241,   242,   243,   247,   248,
-     251,   252,   255,   259,   260,   264,   268,   272,   276
+       0,   118,   118,   124,   125,   126,   127,   128,   129,   130,
+     131,   132,   133,   134,   135,   136,   137,   138,   142,   143,
+     147,   148,   151,   152,   153,   157,   160,   161,   162,   163,
+     166,   169,   170,   173,   174,   175,   179,   182,   186,   187,
+     188,   189,   193,   194,   198,   199,   200,   201,   204,   208,
+     213,   214,   217,   218,   224,   225,   226,   227,   228,   229,
+     230,   231,   232,   233,   234,   235,   236,   237,   241,   242,
+     245,   246,   249,   253,   254,   258,   262,   266,   270
   };
 
   void
@@ -1810,9 +1856,9 @@ namespace yy {
 
 
 } // yy
-#line 1814 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
+#line 1860 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.cpp"
 
-#line 282 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
+#line 276 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/src/parser/parser.yy"
 
 
 void

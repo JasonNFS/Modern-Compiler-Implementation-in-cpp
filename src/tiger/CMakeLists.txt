@@ -12,4 +12,5 @@ target_link_libraries(tiger
         lexer
         yy_driver
         ast
+        utils
         )
