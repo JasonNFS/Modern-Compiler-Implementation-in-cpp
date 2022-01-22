@@ -20,6 +20,7 @@
 
 %code {
 #include "Driver.hh"
+using namespace tiger;
 }
 %param { tiger::Driver& drv }
 
@@ -90,7 +91,8 @@
 %token <std::string> STRINGV "stringv"
 %nterm <tiger::Exp*> exp
 %nterm <tiger::Exp*> unit
-
+%nterm <tiger::BinaryOpExp*> binary_op
+%nterm <tiger::IfExp*> if_exp
 
 //declare precedence
 %precedence OF
@@ -114,27 +116,19 @@
 %start unit;
 
 unit:   exp {
-        std::cout << "found unit:";
         if($1)
             drv.getAstBuilder().setRoot($1);
-        
     }
     ;
 exp:
-   NUMBER
-   {
-    std::cout<<"NUMBER expr found "<<yyla.location<<"\n";
-    $$ = drv.getAstBuilder().buildNumberExp(yyla.location,$1);
-    //$$ = new tiger::NumberExp{yyla.location,
-    //    static_cast<typename tiger::NumberExp::NumberType>($1)};
-   }
-   |binary_op {std::cout<<"binary_op expr found\n";}
-   |if_exp {std::cout<<"if_expr found\n";}
+   NUMBER {$$ = drv.getAstBuilder().BuildNumberExp(yyla.location,$1);}
+   |binary_op {$$ = $1;}
+   |if_exp {$$ = $1;}
    |for_exp {std::cout<<"for_exp found\n";}
    |let_exp {} 
    |while_exp{}
    |fcall {}
-   |NIL {$$ = drv.getAstBuilder().buildNilExp(yyla.location);}
+   |NIL {$$ = drv.getAstBuilder().BuildNilExp(yyla.location);}
    |STRINGV {}
    |record_value {}
    |break {};
@@ -236,7 +230,7 @@ binary_op:
   |exp "<=" exp {}
   |exp ">" exp {}
   |exp ">=" exp {}
-  |exp "+" exp {}
+  |exp "+" exp {$$ = drv.getAstBuilder().BuildBinaryOpExp(yyla.location,$1,$3,BinaryOpExp::OpType::plus);}
   |exp "-" exp {}
   |exp "*" exp {}
   |exp "/" exp {}
@@ -256,8 +250,8 @@ field_assign:
   ;
 
 if_exp:
-  IF exp THEN exp {std::cout<<"if_then found!"<<std::endl;}
-  |IF exp THEN exp ELSE exp {std::cout<<"if_then_else found!\n";}
+  IF exp THEN exp {$$ = drv.getAstBuilder().BuildIfExp(yyla.location,$2,$4);}
+  |IF exp THEN exp ELSE exp {$$ = drv.getAstBuilder().BuildIfExp(yyla.location,$2,$4,$6);}
   ;
 
 while_exp:

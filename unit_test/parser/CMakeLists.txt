@@ -10,6 +10,7 @@ target_link_libraries(
         parser
         lexer
         yy_driver
+        utils
   gtest_main
 )
 include(GoogleTest)

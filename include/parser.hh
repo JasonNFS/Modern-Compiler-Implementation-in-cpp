@@ -421,9 +421,15 @@ namespace yy {
       // "stringv"
       char dummy2[sizeof (std::string)];
 
+      // binary_op
+      char dummy3[sizeof (tiger::BinaryOpExp*)];
+
       // unit
       // exp
-      char dummy3[sizeof (tiger::Exp*)];
+      char dummy4[sizeof (tiger::Exp*)];
+
+      // if_exp
+      char dummy5[sizeof (tiger::IfExp*)];
     };
 
     /// The size of the largest semantic type.
@@ -662,9 +668,17 @@ namespace yy {
         value.move< std::string > (std::move (that.value));
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.move< tiger::BinaryOpExp* > (std::move (that.value));
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.move< tiger::Exp* > (std::move (that.value));
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.move< tiger::IfExp* > (std::move (that.value));
         break;
 
       default:
@@ -719,6 +733,20 @@ namespace yy {
 #endif
 
 #if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, tiger::BinaryOpExp*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const tiger::BinaryOpExp*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
       basic_symbol (typename Base::kind_type t, tiger::Exp*&& v, location_type&& l)
         : Base (t)
         , value (std::move (v))
@@ -726,6 +754,20 @@ namespace yy {
       {}
 #else
       basic_symbol (typename Base::kind_type t, const tiger::Exp*& v, const location_type& l)
+        : Base (t)
+        , value (v)
+        , location (l)
+      {}
+#endif
+
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, tiger::IfExp*&& v, location_type&& l)
+        : Base (t)
+        , value (std::move (v))
+        , location (std::move (l))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const tiger::IfExp*& v, const location_type& l)
         : Base (t)
         , value (v)
         , location (l)
@@ -765,9 +807,17 @@ switch (yykind)
         value.template destroy< std::string > ();
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.template destroy< tiger::BinaryOpExp* > ();
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.template destroy< tiger::Exp* > ();
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.template destroy< tiger::IfExp* > ();
         break;
 
       default:
@@ -2060,9 +2110,17 @@ switch (yykind)
         value.copy< std::string > (YY_MOVE (that.value));
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.copy< tiger::BinaryOpExp* > (YY_MOVE (that.value));
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.copy< tiger::Exp* > (YY_MOVE (that.value));
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.copy< tiger::IfExp* > (YY_MOVE (that.value));
         break;
 
       default:
@@ -2105,9 +2163,17 @@ switch (yykind)
         value.move< std::string > (YY_MOVE (s.value));
         break;
 
+      case symbol_kind::S_binary_op: // binary_op
+        value.move< tiger::BinaryOpExp* > (YY_MOVE (s.value));
+        break;
+
       case symbol_kind::S_unit: // unit
       case symbol_kind::S_exp: // exp
         value.move< tiger::Exp* > (YY_MOVE (s.value));
+        break;
+
+      case symbol_kind::S_if_exp: // if_exp
+        value.move< tiger::IfExp* > (YY_MOVE (s.value));
         break;
 
       default:
@@ -2176,7 +2242,7 @@ switch (yykind)
 
 
 } // yy
-#line 2180 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
+#line 2246 "/Users/kyg/Documents/gits/Modern-Compiler-Implementation-in-cpp/include/parser.hh"
 
 
 

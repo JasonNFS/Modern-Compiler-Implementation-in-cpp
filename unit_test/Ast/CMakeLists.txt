@@ -14,6 +14,7 @@ target_link_libraries(
         yy_driver
         ast
         test_utils
+        ast
   gtest_main
 )
 include(GoogleTest)
